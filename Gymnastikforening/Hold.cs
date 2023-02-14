@@ -4,53 +4,74 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gymnastikforening {
-    public class Hold {
-        //instansfelter hvis der bedesom det
-        private List<Deltager> _deltagerListe;
+namespace GymnastikForening
+{
+    public class Hold
+    {
+        private List<Deltager> deltagerListe; 
 
-        public string HoldId { get; set; }
+        public List<Deltager> DeltagerListe
+        {
+            get { return deltagerListe; }
+        }
+
+        public string HoldId { get; set; } //TumleE22
+        public int År { get; set; } //Man tilmelder sig for et helt år adgang
         public string HoldNavn { get; set; }
         public double PrisPrDeltager { get; set; }
         public int MaxAntalBørn { get; set; }
 
-        public Hold(string holdId, string holdNavn, double prisPrDeltager, int maxAntalBørn) {
-            _deltagerListe = new List<Deltager>();
+        public Hold(string holdId, int år, string holdNavn, double prisPrDeltager, int maxAntalBørn)
+        {
             HoldId = holdId;
-            HoldNavn = holdNavn;
+            År = år;
+            HoldNavn =holdNavn;
             PrisPrDeltager = prisPrDeltager;
             MaxAntalBørn = maxAntalBørn;
+            deltagerListe = new List<Deltager>();
         }
 
-        public override string ToString() {
-            return $"HoldId: {HoldId}, HoldNavn: {HoldNavn}, PrisPrDeltager: {PrisPrDeltager}, MaxAntalBørn: {MaxAntalBørn}";
-        }
-
-        public int AntalTilmeldte() {
-            //tjek om max antal børn er overskredet
-            int deltager = 0;
-            foreach (Deltager d in _deltagerListe) {
-                deltager += d.AntalBørn;
+        public void TilmeldDeltager(Deltager deltager)
+        {
+            if (deltager.AntalBørn < 1)
+            {
+                throw new ArgumentException("Du kan ikke tilføje et antal børn mindre end 1");
             }
-            return deltager;
-        }
-
-        public void TilmeldDeltager(Deltager deltager) {
-            int restPladser = MaxAntalBørn - deltager.AntalBørn;
-            if (MaxAntalBørn > deltager.AntalBørn && restPladser >= deltager.AntalBørn) {
-                _deltagerListe.Add(deltager);
-            }
-            else {
-                Console.WriteLine($"Der er desværre ikke plads på holdet.");
+            else
+            {
+                if (MaxAntalBørn - AntalTilmeldte() >= deltager.AntalBørn)
+                {
+                    deltagerListe.Add(deltager);
+                }
+                else
+                {
+                    throw new FuldtHoldException("Holdet er fyldt");
+                }
             }
         }
 
-        public Double BeregnTotalPris(int antalBørn) {
-            double totalPris = 500.0;
-            for (int i = 1; i < antalBørn; i++) {
-                totalPris += 250.0;
+        public int AntalTilmeldte()
+        {
+            int antal = 0;
+            foreach(Deltager deltager in deltagerListe)
+            {
+                antal = antal + deltager.AntalBørn;
             }
+            return antal;
+        }
+
+        public Double BeregnTotalPris(int antalBørn) //Hvis Deltageren tilmelder en forælder og et barn, så er prisen holdprisen, men efterfølgende børn koster 50% af hold prisen
+        {
+            double totalPris = 0;
+            if (antalBørn>=1)
+                totalPris =  PrisPrDeltager + (antalBørn -1) * (PrisPrDeltager*0.5); 
             return totalPris;
+        }
+
+
+        public override string ToString()
+        {
+            return $"Hold id {HoldId} År {År} Holdnavn {HoldNavn} Pris pr deltager {PrisPrDeltager} Max antal børn {MaxAntalBørn} på holdet";
         }
     }
 }

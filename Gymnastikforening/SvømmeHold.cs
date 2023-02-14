@@ -4,16 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Gymnastikforening {
-    public class SvømmeHold : Hold {
+namespace GymnastikForening
+{
+    public class SvømmeHold : Hold
+    {
         public string SvømmeHal { get; set; }
 
-        public SvømmeHold(string svømmeHal, string holdId, string holdNavn, double prisPrDeltager, int maxAntalBørn) : base(holdId, holdNavn, prisPrDeltager, maxAntalBørn) {
-            SvømmeHal = svømmeHal;
+        public SvømmeHold(string holdId, int år, string holdNavn, double prisPrDeltager, int maxAntalBørn, string svømmehal):base(holdId,år,holdNavn,prisPrDeltager,maxAntalBørn)
+        {
+            SvømmeHal = svømmehal;
         }
 
-        public override string ToString() {
-            return $"Svømmehal: {SvømmeHal}, HoldId: {HoldId}, HoldNavn: {HoldNavn}, PrisPrDeltager: {PrisPrDeltager}, MaxAntalBørn: {MaxAntalBørn}";
+        public override string ToString()
+        {
+            return base.ToString() + $" Svømmehal {SvømmeHal}";
         }
+
     }
 }

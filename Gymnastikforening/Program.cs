@@ -1,95 +1,103 @@
-﻿using Gymnastikforening;
-using System.Linq.Expressions;
+﻿// See https://aka.ms/new-console-template for more information
 
-//Opgave 1
-Console.WriteLine("Opgave 1");
-Hold h1 = new Hold("001", "BørneHold1", 150.0, 7);
-Hold h2 = new Hold("002", "BørneHold2", 175.0, 20);
-Hold h3 = new Hold("003", "BørneHold3", 200.0, 25);
+using GymnastikForening;
+//using Microsoft.VisualBasic;
 
-//Til test af exception
-Hold h4 = new Hold("003", "BørneHold4", 225.0, 30);
+Hold h1 = new Hold("Tumle22t", 2022, "Tumlinger", 500, 50);
+Hold h2 = new Hold("Tumle23t", 2022, "Rollinger", 700, 15);
+//Console.WriteLine(h1);
+//Console.WriteLine(h2);
 
-Console.WriteLine(h1.ToString());
-Console.WriteLine(h2.ToString());
-Console.WriteLine(h3.ToString());
 
-Console.WriteLine("\n");
-
-//Opgave 2 
-Console.WriteLine("Opgave 2");
-HoldKatalog Katalog = new HoldKatalog();
+HoldKatalog holdKatalog = new HoldKatalog();
 try
 {
-    Katalog.TilføjHold(h1);
-    Katalog.TilføjHold(h2);
-    Katalog.TilføjHold(h3);
-    Katalog.TilføjHold(h4);
+    holdKatalog.TilføjHold(h1);
+    holdKatalog.TilføjHold(h2);
 }
-catch (ArgumentException)
+
+catch (ArgumentException aex)
 {
-    Console.WriteLine("Ikke mulig at tilføje et hold der allerede findes");
+    Console.WriteLine("Fejl ved tilføjelse af hold");
+}
+catch (Exception ex)
+{
+    Console.WriteLine("Der skete en generel fejl!");
 }
 
-Console.WriteLine(Katalog.ToString());
 
-//Opgae 3
-//Se Tilføj metode ovenfor
-Console.WriteLine("Opgave 3");
-Console.WriteLine(Katalog.FindHold("002"));
+Console.WriteLine(holdKatalog); //udskriving vha. ToString metode
 
-Console.WriteLine("\n");
 
-//Opgave 4 
-Console.WriteLine("Opgave 4");
-Deltager d1 = new Deltager("Alice", "By Vej 1", 1);
-Deltager d2 = new Deltager("Bob", "Land Vej 2", 2);
-Deltager d3 = new Deltager("Charlie", "Strand Vej 3", 3);
-Deltager d4 = new Deltager("Daisy", "Vej By 4", 4);
-
-Console.WriteLine(d1.ToString());
-Console.WriteLine(d2.ToString());
-Console.WriteLine(d3.ToString());
-Console.WriteLine("\n");
-
-//Opgave 5
-Console.WriteLine("Opgave 5");
-Console.WriteLine("Antal på hold 1: " + h1.AntalTilmeldte());
-h1.TilmeldDeltager(d1);
-h1.TilmeldDeltager(d2);
-h1.TilmeldDeltager(d3);
-Console.WriteLine("Antal på hold 1: " + h1.AntalTilmeldte());
+Deltager d1 = new Deltager("Poul Henriksen", "Vej 123", 20);
+Deltager d2 = new Deltager("Charlotte Heegaard", "Gade 321", 15);
+Deltager d3 = new Deltager("Poul Henriksen", "Vej 123", 5);
+Deltager d4 = new Deltager("Charlotte Heegaard", "Gade 321", 5);
+Deltager d5 = new Deltager("Poul Henriksen", "Vej 123", 3);
+Deltager d6 = new Deltager("Charlotte Heegaard", "Gade 321", 2);
+try
+{
+    h1.TilmeldDeltager(d1);
+    h1.TilmeldDeltager(d2);
+}
+catch (FuldtHoldException fex)
+{
+    Console.WriteLine(fex.Message);
+}
+catch (ArgumentException aex) 
+{
+    Console.WriteLine("Du kan ikke tilføje et antal børn mindre end et");
+}
 
 h2.TilmeldDeltager(d3);
+h2.TilmeldDeltager(d4);
+h2.TilmeldDeltager(d5);
+h2.TilmeldDeltager(d6);
 
-//for mange ledige pladser
-h1.TilmeldDeltager(d4);
-
-Console.WriteLine("\n");
-
-//Opgave 7 
-//Implementering af Exception handling - Kan ses ved Opgave 2
-
-//Opgave 8
-Console.WriteLine("Opgave 8");
-Hold s1 = new SvømmeHold("Slagelse Svømmehal", "005", "Frø Holdet", 185.0, 10);
-Hold s2 = new SvømmeHold("Roskilde Svømmehal", "006", "Haj Holdet", 185.0, 15);
-Hold s3 = new SvømmeHold("Aarhus Svømmehal", "007", "Pingvin Holdet", 185.0, 12);
-
-Console.WriteLine(s1.ToString());
-Console.WriteLine(s2.ToString());
-Console.WriteLine(s3.ToString());
+Ansat a1 = new Ansat("John", "321 Vej", "12345678", "træner");
+Ansat a2 = new Ansat("Bob", "123 Vej", "87654321", "leder");
+Console.WriteLine(a1.ToString());
+Console.WriteLine(a2.ToString());
 
 Console.WriteLine("\n");
 
-//Opgave 10
-Console.WriteLine("Opgave 10");
-Console.WriteLine(h2.BeregnTotalPris(3));
+Underviser u1 = new Underviser("træner", true, "Charlie", "123 By", "11111111", "Instruktør");
+Underviser u2 = new Underviser("træner", false, "Alice", "321 By", "88888888", "Underviser");
+Console.WriteLine(u1.ToString());
+Console.WriteLine(u2.ToString());
 
 Console.WriteLine("\n");
 
-//Opgave 12 
-Console.WriteLine("Opgave 12");
-Console.WriteLine(Katalog.FindHold("003"));
+Addministrator ad1 = new Addministrator("Ledelse", "Philip", "123 By", "11111111", "Direktør");
+Addministrator ad2 = new Addministrator("vedligeholdelse", "Poul", "321 By", "88888888", "Admin");
+Console.WriteLine(ad1.ToString());
+Console.WriteLine(ad2.ToString());
+
+Console.WriteLine("\nSamletAntalDeltagerePåAlleHold");
+
+Console.WriteLine(holdKatalog.SamletAntalDeltagerePåAlleHold());
+
+Console.WriteLine("\nGennemsnitligeDeltagerePrHold");
+
+Console.WriteLine(holdKatalog.GennemsnitligeDeltagerePrHold());
+
+Console.WriteLine("\nFlestDeltagerePåHold");
+
+Console.WriteLine(holdKatalog.FlestDeltagerePåHold());
+
+Console.WriteLine("\n");
+
+//Console.WriteLine($"Prisen for 3 børn {h1.BeregnTotalPris(3)} ");
+//Console.WriteLine($"Prisen for 1 børn {h1.BeregnTotalPris(1)} ");
+//Console.WriteLine($"Prisen for 0 børn {h1.BeregnTotalPris(0)} ");
+//Console.WriteLine($"Prisen for -1 børn {h1.BeregnTotalPris(-1)} ");
+//Console.WriteLine(d1);
+//Console.WriteLine(d2);
+
+
+
+
+
+Console.ReadLine();
 
 
