@@ -4,7 +4,7 @@ using GymnastikForening;
 //using Microsoft.VisualBasic;
 
 Hold h1 = new Hold("Tumle22t", 2022, "Tumlinger", 500, 50);
-Hold h2 = new Hold("Tumle23t", 2022, "Rollinger", 700, 15);
+Hold h2 = new Hold("Tumle23t", 2022, "Rollinger", 500, 15);
 //Console.WriteLine(h1);
 //Console.WriteLine(h2);
 
@@ -31,10 +31,10 @@ Console.WriteLine(holdKatalog); //udskriving vha. ToString metode
 
 Deltager d1 = new Deltager("Poul Henriksen", "Vej 123", 20);
 Deltager d2 = new Deltager("Charlotte Heegaard", "Gade 321", 15);
-Deltager d3 = new Deltager("Poul Henriksen", "Vej 123", 5);
-Deltager d4 = new Deltager("Charlotte Heegaard", "Gade 321", 5);
-Deltager d5 = new Deltager("Poul Henriksen", "Vej 123", 3);
-Deltager d6 = new Deltager("Charlotte Heegaard", "Gade 321", 2);
+Deltager d3 = new Deltager("Poul Henriksen", "Vej 123", 5); //1500kr
+Deltager d4 = new Deltager("Charlotte Heegaard", "Gade 321", 5); //1500kr
+Deltager d5 = new Deltager("Poul Henriksen", "Vej 123", 3); //1000kr
+Deltager d6 = new Deltager("Charlotte Heegaard", "Gade 321", 2); //750kr
 try
 {
     h1.TilmeldDeltager(d1);
@@ -86,6 +86,19 @@ Console.WriteLine("\nFlestDeltagerePåHold");
 Console.WriteLine(holdKatalog.FlestDeltagerePåHold());
 
 Console.WriteLine("\n");
+
+Console.WriteLine("\nHoldMedFlestDeltagere");
+
+Console.WriteLine(holdKatalog.HoldMedFlestDeltagere());
+
+Console.WriteLine("\n");
+
+Console.WriteLine("\nMaxIndtjenningpåHold");
+
+Console.WriteLine(holdKatalog.MaxIndtjenningpåHold(h2));
+
+Console.WriteLine("\n");
+
 
 //Console.WriteLine($"Prisen for 3 børn {h1.BeregnTotalPris(3)} ");
 //Console.WriteLine($"Prisen for 1 børn {h1.BeregnTotalPris(1)} ");

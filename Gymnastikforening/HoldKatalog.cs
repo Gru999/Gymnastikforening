@@ -110,29 +110,40 @@ namespace GymnastikForening
             return sum;
         }
 
-        //public Hold HoldMedFlestDeltagere() {
-        //    int sum = holdListe[0].AntalTilmeldte();
-        //    foreach (Hold h in holdListe) {
-        //        if (sum < h.AntalTilmeldte()) {
-        //            sum = h.AntalTilmeldte();
-        //        }
-        //    }
-
-        //    Hold h = holdListe.Find(x => x);
-        //}
-
-        public double MaxIndtjenningpåHold(Hold hold)
-        {
-            
-            return 0;
+        public Hold HoldMedFlestDeltagere() {
+            Hold holdDeltagere = null;
+            int højesteSum = int.MinValue;
+            foreach (Hold h in holdListe) {
+                int sum = h.AntalTilmeldte();
+                if (sum > højesteSum) {
+                    højesteSum = sum;
+                    holdDeltagere = h;
+                }
+            }
+            return holdDeltagere;
         }
 
-        public Hold HoldMedHøjstIndtjenning()
-        {
-            return null;
+        public double MaxIndtjenningpåHold(Hold hold) {
+            double sum = 0;
+            foreach (Deltager d in hold.DeltagerListe) {
+                sum += hold.BeregnTotalPris(d.AntalBørn);
+            }
+            return sum;
         }
 
-      
-
+        public Hold HoldMedHøjstIndtjenning() {
+            Hold holdIndtjenning = null;
+            int højesteSum = int.MinValue;
+            foreach (Hold h in holdListe)
+            {
+                int sum = h.AntalTilmeldte();
+                if (sum > højesteSum)
+                {
+                    højesteSum = sum;
+                    holdIndtjenning = h;
+                }
+            }
+            return holdIndtjenning;
+        }
     }
 }
