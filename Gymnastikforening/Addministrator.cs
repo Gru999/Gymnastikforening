@@ -22,7 +22,7 @@ namespace GymnastikForening {
         }
 
         public override string ToString() {
-            return $"AnsvarsOmråde: {AnsvarsOmråde} " + base.ToString();
+            return $"\tAnsvarsOmråde: {AnsvarsOmråde}" + base.ToString();
         }
     }
 }

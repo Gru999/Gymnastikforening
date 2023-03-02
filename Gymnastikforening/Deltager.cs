@@ -22,7 +22,7 @@ namespace GymnastikForening
 
         public override string ToString()
         {
-            return $"Forældre navn {ForælderNavn} adresse {Adresse} antal børn {AntalBørn}";
+            return $"\tForældre navn: {ForælderNavn}\n\tAdresse: {Adresse}\n\tAntal børn {AntalBørn}";
         }
     }
 }

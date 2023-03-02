@@ -23,7 +23,7 @@ namespace GymnastikForening {
         }
 
         public override string ToString() {
-            return $"Uddannelse: {Uddannelse}, BørneAttest: {BørneAttest} " + base.ToString();
+            return $"\tUddannelse: {Uddannelse}\n\tBørneAttest: {BørneAttest}" + base.ToString();
         }
     }
 }

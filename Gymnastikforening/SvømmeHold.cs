@@ -17,7 +17,7 @@ namespace GymnastikForening
 
         public override string ToString()
         {
-            return base.ToString() + $" Svømmehal {SvømmeHal}";
+            return base.ToString() + $"\n\tSvømmehal {SvømmeHal}";
         }
 
     }

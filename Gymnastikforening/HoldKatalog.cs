@@ -16,7 +16,7 @@ namespace GymnastikForening
             holdListe = new List<Hold>();
         }
 
-        public void TilføjHold(Hold hold) // der må ikke være dubletter
+        public void TilføjHold(Hold hold)
         {
             if (FindHold(hold.HoldId) == null)
             {
@@ -36,18 +36,16 @@ namespace GymnastikForening
             //    if (hold.HoldId == holdId)
             //        return hold;
             //}
+
             int i = 0;
             while(i < holdListe.Count)
             {
                 if (holdListe[i].HoldId== holdId)
                 {
                     return holdListe[i];
-                    
                 }
                 i++;
             }
-
-
             return null;
         }
 
