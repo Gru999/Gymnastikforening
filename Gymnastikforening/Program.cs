@@ -120,7 +120,7 @@ gRepo.Add(a4);
 gRepo.Remove(a1);
 
 //Update test
-gRepo.Update(a3, new Ansat("Frank", "vej 1", "10101010", "træner"));
+gRepo.Update(a3, new Ansat("Anna", "vej 1", "10101010", "træner"));
 
 
 //Ansat print
@@ -130,6 +130,13 @@ foreach (Ansat a in gRepo.List) {
 }
 #endregion
 
+#region Opgave 19
+//Sort by name test
+gRepo.List.Sort();
+foreach (Ansat a in gRepo.List) {
+    Console.WriteLine(a.ToString());
+}
+
+#endregion
+
 Console.ReadLine();
-
-

@@ -77,7 +77,7 @@ namespace GymnastikForening {
         }
 
         public int CompareTo(Ansat? other) {
-            return this.AnsættelsesDato.CompareTo(other.AnsættelsesDato);
+            return this.Navn.CompareTo(other.Navn);
         }
     }
 }
