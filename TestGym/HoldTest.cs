@@ -1,10 +1,7 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-
 namespace TestGym
 {
     [TestClass]
-    public class UnitTest1
+    public class HoldTest
     {
         [TestMethod]
         public void TestMethod1()
